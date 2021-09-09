@@ -53,8 +53,7 @@ def main(screen):
 		pen_position = read_key(screen, pen_position)
 		sketch[pen_position[0]][pen_position[1]] = 'x'
 		drawscreen(screen, sketch, pen_position)
-		
 		curses.napms(500)
 
 screen = curses.initscr()
-main(screen)
+curses.wrapper(main)
