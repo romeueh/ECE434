@@ -80,7 +80,7 @@ def main(screen):
 		if (GPIO.event_detected(button_left)) and (pen_position[0] > 1):
 			pen_position = [pen_position[0]-1, pen_position[1]]
 		if GPIO.event_detected(button_shake):
-			clearscreen(screen);
+			clearscreen();
 		if GPIO.event_detected(button_exit):
 			break
 		curses.napms(10)
