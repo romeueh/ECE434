@@ -35,6 +35,12 @@ GPIO.add_event_detect(button_up, GPIO.FALLING)
 GPIO.add_event_detect(button_down, GPIO.FALLING)
 
 screen = curses.initscr()
+screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the arrow keys to direct the \npen on the screen. When you want to clear the screen press the space bar to \nshake the Etch-A-Sketch. Lastly, press q when you want to exit. Have fun!\n")
+screen.addstr("\nWhat size would you like to board to be 1-9?")
+screen.refresh()
+
+max_dim = int(screen.getch())-47
+sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)];
 
 def drawscreen():
 	screen.clear()
@@ -53,17 +59,6 @@ def clearscreen():
 	screen.refresh()
 
 def main(screen):
-	screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the arrow keys to direct the \npen on the screen. When you want to clear the screen press the space bar to \nshake the Etch-A-Sketch. Lastly, press q when you want to exit. Have fun!\n")
-	screen.addstr("\nWhat size would you like to board to be 1-9?")
-	screen.refresh()
-
-	max_dim = int(screen.getch())-47
-	sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)];
-	for i in range(max_dim):
-		sketch[i][0] = chr(48 +i)
-	for j in range(max_dim):
-		sketch[0][j] = chr(48 +j)
-		
 	drawscreen()
 	pen_position = [1,1]
 	pos_changed = False
