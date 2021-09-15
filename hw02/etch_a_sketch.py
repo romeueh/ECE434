@@ -7,27 +7,27 @@ import curses
 import Adafruit_BBIO.GPIO as GPIO
 from curses import wrapper
 
-global clear
+global shake
 global exit
 global pen_position
 global max_dim
 global screen
 global sketch
 
-clear = False
+shake = False
 exit = False
 pen_position = [1,1]
 max_dim = 5
 
 button_exit = "P9_13"
-button_clear = "P9_14"
+button_shake = "P9_14"
 button_left = "P9_17"
 button_right = "P9_18"
 button_up = "P9_21"
 button_down = "P9_22"
 
 GPIO.setup(button_exit, GPIO.IN)
-GPIO.setup(button_clear, GPIO.IN)
+GPIO.setup(button_shake, GPIO.IN)
 GPIO.setup(button_left, GPIO.IN)
 GPIO.setup(button_right, GPIO.IN)
 GPIO.setup(button_up, GPIO.IN)
@@ -63,7 +63,7 @@ def clearscreen():
 
 def read_button(channel):
 	global pen_position
-	global clear
+	global shake
 	global exit
 	if GPIO.input(channel) == 1:
 		button_key = channel
@@ -75,13 +75,13 @@ def read_button(channel):
 			changed_pen_position = [pen_position[0]+1, pen_position[1]]
 		if (button_key == button_left) and (pen_position[0] > 1):
 			changed_pen_position = [pen_position[0]-1, pen_position[1]]
-		if button_key == button_clear:
-			clear = True
+		if button_key == button_shake:
+			shake = True
 		if button_key == button_exit:
 			exit = True
 
 GPIO.add_event_detect(button_exit, GPIO.FALLING, callback=read_button)
-GPIO.add_event_detect(button_clear, GPIO.FALLING, callback=read_button)
+GPIO.add_event_detect(button_shake, GPIO.FALLING, callback=read_button)
 GPIO.add_event_detect(button_left, GPIO.FALLING, callback=read_button)
 GPIO.add_event_detect(button_right, GPIO.FALLING, callback=read_button)
 GPIO.add_event_detect(button_up, GPIO.FALLING, callback=read_button)
@@ -90,15 +90,14 @@ GPIO.add_event_detect(button_down, GPIO.FALLING, callback=read_button)
 
 def main(screen):
 	drawscreen()
-	clear = False
 
 	while(1):
 		drawscreen()
 		if exit == True:
 			break
-		if clear == True:
+		if shake == True:
 			clearscreen(screen);
-			clear = False
+			shake = False
 		sketch[pen_position[0]][pen_position[1]] = 'x'
 		curses.napms(100)
 
