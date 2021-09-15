@@ -7,15 +7,11 @@ import curses
 import Adafruit_BBIO.GPIO as GPIO
 from curses import wrapper
 
-global shake
-global exit
 global pen_position
 global max_dim
 global screen
 global sketch
 
-shake = False
-exit = False
 pen_position = [1,1]
 max_dim = 5
 
@@ -70,11 +66,11 @@ def clearscreen():
 
 def main(screen):
 	drawscreen()
-	shake = False
 	pen_position = [1,1]
 
 	while(1):
 		drawscreen()
+		sketch[pen_position[0]][pen_position[1]] = 'x'
 		if (GPIO.event_detected(button_down)) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
 		if (GPIO.event_detected(button_up)) and ( pen_position[1] > 1):
@@ -84,15 +80,9 @@ def main(screen):
 		if (GPIO.event_detected(button_left)) and (pen_position[0] > 1):
 			pen_position = [pen_position[0]-1, pen_position[1]]
 		if GPIO.event_detected(button_shake):
-			shake = True
-		if GPIO.event_detected(button_exit):
-			exit = True
-		if exit == True:
-			break
-		if shake == True:
 			clearscreen(screen);
-			shake = False
-		sketch[pen_position[0]][pen_position[1]] = 'x'
+		if GPIO.event_detected(button_exit):
+			break
 		curses.napms(10)
 
 curses.wrapper(main)
