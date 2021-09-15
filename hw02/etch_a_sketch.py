@@ -10,7 +10,7 @@ from curses import wrapper
 global exit
 global pen_position
 global max_dim
-
+global screen
 
 clear = False
 exit = False
@@ -32,15 +32,21 @@ GPIO.setup(button_up, GPIO.IN)
 GPIO.setup(button_down, GPIO.IN)
 
 screen = curses.initscr()
+screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the arrow keys to direct the \npen on the screen. When you want to clear the screen press the space bar to \nshake the Etch-A-Sketch. Lastly, press q when you want to exit. Have fun!\n")
+screen.addstr("\nWhat size would you like to board to be 1-9?")
+screen.refresh()
 
-def drawscreen(screen, sketch):
+max_dim = int(screen.getch())-47
+
+
+def drawscreen( sketch):
     screen.clear()
     for i in range(max_dim):
         for j in range(max_dim):
             screen.addch(i*2, j*3, sketch[j][i])
     screen.refresh()
 
-def clearscreen(screen):
+def clearscreen():
     sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)]
     for i in range(max_dim):
         sketch[i][0] = chr(48 +i)
@@ -71,16 +77,10 @@ def read_button(channel):
                         exit = True
 
 def main(screen):
-        screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the arrow keys to direct the \npen on the screen. When you want to clear the screen press the space bar to \nshake the Etch-A-Sketch. Lastly, press q when you want to exit. Have fun!\n")
-        screen.addstr("\nWhat size would you like to board to be 1-9?")
-        screen.refresh()
-
-        max_dim = int(screen.getch())-47
-
-        sketch = clearscreen(screen)
+        sketch = clearscreen()
 
         while(1):
-                drawscreen(screen, sketch)
+                drawscreen(sketch)
                 if exit == True:
                         break
                 sketch[pen_position[0]][pen_position[1]] = 'x'
