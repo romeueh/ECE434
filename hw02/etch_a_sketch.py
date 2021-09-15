@@ -50,7 +50,6 @@ for j in range(max_dim):
 
 def drawscreen():
 	screen.clear()
-	sketch[pen_position[0]][pen_position[1]] = 'x'
 	for i in range(max_dim):
 		for j in range(max_dim):
 			screen.addch(i*2, j*3, sketch[j][i])
@@ -71,6 +70,7 @@ def main(screen):
 
 	while(1):
 		drawscreen()
+		sketch[pen_position[0]][pen_position[1]] = 'x'
 		if (GPIO.event_detected(button_down)) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
 		if (GPIO.event_detected(button_up)) and ( pen_position[1] > 1):
