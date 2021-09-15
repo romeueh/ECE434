@@ -59,7 +59,7 @@ def clearscreen():
 
 def main(screen):
 	sketch = clearscreen()
-	drawscreen()
+	drawscreen(sketch)
 	pen_position = [1,1]
 	pos_changed = True
 
@@ -84,7 +84,7 @@ def main(screen):
 			
 		if(pos_changed):
 			sketch[pen_position[0]][pen_position[1]] = 'x'
-			drawscreen()
+			drawscreen(sketch)
 			pos_changed = False
 		curses.napms(10)
 
