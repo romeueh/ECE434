@@ -33,6 +33,13 @@ GPIO.setup(button_right, GPIO.IN)
 GPIO.setup(button_up, GPIO.IN)
 GPIO.setup(button_down, GPIO.IN)
 
+GPIO.add_event_detect(button_exit, GPIO.FALLING)
+GPIO.add_event_detect(button_shake, GPIO.FALLING)
+GPIO.add_event_detect(button_left, GPIO.FALLING)
+GPIO.add_event_detect(button_right, GPIO.FALLING)
+GPIO.add_event_detect(button_up, GPIO.FALLING)
+GPIO.add_event_detect(button_down, GPIO.FALLING)
+
 screen = curses.initscr()
 screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the arrow keys to direct the \npen on the screen. When you want to clear the screen press the space bar to \nshake the Etch-A-Sketch. Lastly, press q when you want to exit. Have fun!\n")
 screen.addstr("\nWhat size would you like to board to be 1-9?")
@@ -61,31 +68,19 @@ def clearscreen():
 	screen.clear()
 	screen.refresh()
 
-def read_button(channel):
-	global pen_position
-	global shake
-	global exit
-	if GPIO.input(channel) == 1:
-		button_key = channel
-		if (button_key == button_down) and (pen_position[1] < max_dim-1):
-			pen_position = [pen_position[0], pen_position[1]+1]
-		if (button_key == button_up) and ( pen_position[1] > 1):
-			changed_pen_position = [pen_position[0], pen_position[1]-1]
-		if (button_key == button_right) and (pen_position[0] < max_dim-1):
-			changed_pen_position = [pen_position[0]+1, pen_position[1]]
-		if (button_key == button_left) and (pen_position[0] > 1):
-			changed_pen_position = [pen_position[0]-1, pen_position[1]]
-		if button_key == button_shake:
-			shake = True
-		if button_key == button_exit:
-			exit = True
-
-GPIO.add_event_detect(button_exit, GPIO.FALLING, callback=read_button)
-GPIO.add_event_detect(button_shake, GPIO.FALLING, callback=read_button)
-GPIO.add_event_detect(button_left, GPIO.FALLING, callback=read_button)
-GPIO.add_event_detect(button_right, GPIO.FALLING, callback=read_button)
-GPIO.add_event_detect(button_up, GPIO.FALLING, callback=read_button)
-GPIO.add_event_detect(button_down, GPIO.FALLING, callback=read_button)
+def read_button():
+	if (GPIO.event_detected(button_down)) and (pen_position[1] < max_dim-1):
+		pen_position = [pen_position[0], pen_position[1]+1]
+	if (GPIO.event_detected(button_up)) and ( pen_position[1] > 1):
+		changed_pen_position = [pen_position[0], pen_position[1]-1]
+	if (GPIO.event_detected(button_right)) and (pen_position[0] < max_dim-1):
+		changed_pen_position = [pen_position[0]+1, pen_position[1]]
+	if (GPIO.event_detected(button_left)) and (pen_position[0] > 1):
+		changed_pen_position = [pen_position[0]-1, pen_position[1]]
+	if GPIO.event_detected(button_shake):
+		shake = True
+	if GPIO.event_detected(button_exit):
+		exit = True
 
 
 def main(screen):
@@ -94,12 +89,13 @@ def main(screen):
 
 	while(1):
 		drawscreen()
+		read_button()
 		if exit == True:
 			break
 		if shake == True:
 			clearscreen(screen);
 			shake = False
 		sketch[pen_position[0]][pen_position[1]] = 'x'
-		curses.napms(100)
+		curses.napms(10)
 
 curses.wrapper(main)
