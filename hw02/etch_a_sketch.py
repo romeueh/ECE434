@@ -90,6 +90,7 @@ GPIO.add_event_detect(button_down, GPIO.FALLING, callback=read_button)
 
 def main(screen):
 	drawscreen()
+	shake = False
 
 	while(1):
 		drawscreen()
