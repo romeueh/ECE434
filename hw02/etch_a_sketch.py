@@ -11,6 +11,7 @@ global pen_position
 global max_dim
 global screen
 global sketch
+global pos_changed
 
 button_exit = "P9_13"
 button_shake = "P9_14"
@@ -64,22 +65,30 @@ def clearscreen():
 def main(screen):
 	drawscreen()
 	pen_position = [1,1]
+	pos_changed = False
 
 	while(1):
-		drawscreen()
-		sketch[pen_position[0]][pen_position[1]] = 'x'
 		if (GPIO.event_detected(button_down)) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
+			pos_changed = True
 		if (GPIO.event_detected(button_up)) and ( pen_position[1] > 1):
 			pen_position = [pen_position[0], pen_position[1]-1]
+			pos_changed = True
 		if (GPIO.event_detected(button_right)) and (pen_position[0] < max_dim-1):
 			pen_position = [pen_position[0]+1, pen_position[1]]
+			pos_changed = True
 		if (GPIO.event_detected(button_left)) and (pen_position[0] > 1):
 			pen_position = [pen_position[0]-1, pen_position[1]]
+			pos_changed = True
 		if GPIO.event_detected(button_shake):
 			clearscreen();
 		if GPIO.event_detected(button_exit):
 			break
+			
+		if(pos_changed):
+			sketch[pen_position[0]][pen_position[1]] = 'x'
+			drawscreen()
+			pos_changed = False
 		curses.napms(10)
 
 curses.wrapper(main)
