@@ -83,6 +83,7 @@ def main(screen):
 			pos_changed = True
 		if GPIO.event_detected(button_shake):
 			clearscreen();
+			pos_changed = True
 		if GPIO.event_detected(button_exit):
 			break
 			
