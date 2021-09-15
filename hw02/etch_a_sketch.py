@@ -66,7 +66,6 @@ def clearscreen():
 
 def main(screen):
 	drawscreen()
-	pen_position = [1,1]
 
 	while(1):
 		drawscreen()
