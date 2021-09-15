@@ -16,8 +16,8 @@ GPIO.setup(LED_4, GPIO.OUT)
 
 button_1 = "P9_17"
 button_2 = "P9_18"
-button_3 = "P9_21"
-button_4 = "P9_22"
+button_3 = "P9_23"
+button_4 = "P9_24"
 GPIO.setup(button_1, GPIO.IN)
 GPIO.setup(button_2, GPIO.IN)
 GPIO.setup(button_3, GPIO.IN)
