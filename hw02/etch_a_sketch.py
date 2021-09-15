@@ -12,7 +12,6 @@ global max_dim
 global screen
 global sketch
 
-pen_position = [1,1]
 max_dim = 5
 
 button_exit = "P9_13"
@@ -66,6 +65,7 @@ def clearscreen():
 
 def main(screen):
 	drawscreen()
+	pen_position = [1,1]
 
 	while(1):
 		drawscreen()
