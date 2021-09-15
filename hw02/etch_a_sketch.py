@@ -61,6 +61,7 @@ def clearscreen():
 	for j in range(max_dim):
 		sketch[0][j] = chr(48 +j)
 	screen.refresh()
+	return sketch
 
 def main(screen):
 	clearscreen()
@@ -82,7 +83,7 @@ def main(screen):
 			pen_position = [pen_position[0]-1, pen_position[1]]
 			pos_changed = True
 		if GPIO.event_detected(button_shake):
-			clearscreen();
+			sketch = clearscreen()
 			pos_changed = True
 		if GPIO.event_detected(button_exit):
 			break
