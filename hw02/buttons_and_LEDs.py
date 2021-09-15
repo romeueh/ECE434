@@ -23,35 +23,21 @@ GPIO.setup(button_2, GPIO.IN)
 GPIO.setup(button_3, GPIO.IN)
 GPIO.setup(button_4, GPIO.IN)
 
-def led_off(channel):
+def update(channel):
+  state = GPIO.input(channel)
   if (channel == button_1):
-    GPIO.output(LED1, GPIO.LOW);
+    GPIO.output(LED1, state);
   if (channel == button_2):
-    GPIO.output(LED2, GPIO.LOW);
+    GPIO.output(LED2, state);
   if (channel == button_3):
-    GPIO.output(LED3, GPIO.LOW);
+    GPIO.output(LED3, state);
   if (channel == button_4):
-    GPIO.output(LED4, GPIO.LOW);
+    GPIO.output(LED4, state);
 
-def led_on(channel):
-  if (channel == button_1):
-    GPIO.output(LED1, GPIO.HIGH);
-  if (channel == button_2):
-    GPIO.output(LED2, GPIO.HIGH);
-  if (channel == button_3):
-    GPIO.output(LED3, GPIO.HIGH);
-  if (channel == button_4):
-    GPIO.output(LED4, GPIO.HIGH);
-
-GPIO.add_event_detect(button_1, GPIO.FALLING, callback=led_off)
-GPIO.add_event_detect(button_2, GPIO.FALLING, callback=led_off)
-GPIO.add_event_detect(button_3, GPIO.FALLING, callback=led_off)
-GPIO.add_event_detect(button_4, GPIO.FALLING, callback=led_off)
-
-GPIO.add_event_detect(button_1, GPIO.RISING, callback=led_on)
-GPIO.add_event_detect(button_2, GPIO.RISING, callback=led_on)
-GPIO.add_event_detect(button_3, GPIO.RISING, callback=led_on)
-GPIO.add_event_detect(button_4, GPIO.RISING, callback=led_on)
+GPIO.add_event_detect(button_1, GPIO.BOTH, callback=update)
+GPIO.add_event_detect(button_2, GPIO.BOTH, callback=update)
+GPIO.add_event_detect(button_3, GPIO.BOTH, callback=update)
+GPIO.add_event_detect(button_4, GPIO.BOTH, callback=update)
 
 try:
     while True:
