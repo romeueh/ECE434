@@ -7,6 +7,7 @@ import curses
 import Adafruit_BBIO.GPIO as GPIO
 from curses import wrapper
 
+global clear
 global exit
 global pen_position
 global max_dim
@@ -40,16 +41,16 @@ screen.refresh()
 max_dim = int(screen.getch())-47
 sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)];
 for i in range(max_dim):
-        sketch[i][0] = chr(48 +i)
+	sketch[i][0] = chr(48 +i)
 for j in range(max_dim):
-        sketch[0][j] = chr(48 +j)
+	sketch[0][j] = chr(48 +j)
 
 def drawscreen():
-    screen.clear()
-    for i in range(max_dim):
-        for j in range(max_dim):
-            screen.addch(i*2, j*3, sketch[j][i])
-    screen.refresh()
+	screen.clear()
+	for i in range(max_dim):
+		for j in range(max_dim):
+			screen.addch(i*2, j*3, sketch[j][i])
+	screen.refresh()
 
 def clearscreen():
 	sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)]
@@ -61,18 +62,21 @@ def clearscreen():
 	screen.refresh()
 
 def read_button(channel):
+	global pen_position
+	global clear
+	global exit
 	if GPIO.input(channel) == 1:
 		button_key = channel
 		if (button_key == button_down) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
 		if (button_key == button_up) and ( pen_position[1] > 1):
-			pen_position = [pen_position[0], pen_position[1]-1]
+			changed_pen_position = [pen_position[0], pen_position[1]-1]
 		if (button_key == button_right) and (pen_position[0] < max_dim-1):
-			pen_position = [pen_position[0]+1, pen_position[1]]
+			changed_pen_position = [pen_position[0]+1, pen_position[1]]
 		if (button_key == button_left) and (pen_position[0] > 1):
-			pen_position = [pen_position[0]-1, pen_position[1]]
+			changed_pen_position = [pen_position[0]-1, pen_position[1]]
 		if button_key == button_clear:
-			sketch = clearscreen(screen)
+			clear = True
 		if button_key == button_exit:
 			exit = True
 
@@ -91,6 +95,9 @@ def main(screen):
 		drawscreen()
 		if exit == True:
 			break
+		if clear == True:
+			clearscreen(screen);
+			clear = False
 		sketch[pen_position[0]][pen_position[1]] = 'x'
 		curses.napms(100)
 
