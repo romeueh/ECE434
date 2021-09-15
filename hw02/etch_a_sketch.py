@@ -12,8 +12,6 @@ global max_dim
 global screen
 global sketch
 
-max_dim = 5
-
 button_exit = "P9_13"
 button_shake = "P9_14"
 button_left = "P9_17"
