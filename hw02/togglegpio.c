@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "gpio-utils.h"
+#include "gpio-utils.c"
 
 int main(int argc, char** argv)
 {
