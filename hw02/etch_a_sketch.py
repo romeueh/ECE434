@@ -11,6 +11,7 @@ global exit
 global pen_position
 global max_dim
 global screen
+global sketch
 
 clear = False
 exit = False
@@ -37,9 +38,13 @@ screen.addstr("\nWhat size would you like to board to be 1-9?")
 screen.refresh()
 
 max_dim = int(screen.getch())-47
+sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)];
+for i in range(max_dim):
+        sketch[i][0] = chr(48 +i)
+for j in range(max_dim):
+        sketch[0][j] = chr(48 +j)
 
-
-def drawscreen( sketch):
+def drawscreen():
     screen.clear()
     for i in range(max_dim):
         for j in range(max_dim):
@@ -47,44 +52,29 @@ def drawscreen( sketch):
     screen.refresh()
 
 def clearscreen():
-    sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)]
-    for i in range(max_dim):
-        sketch[i][0] = chr(48 +i)
-    for j in range(max_dim):
-        sketch[0][j] = chr(48 +j)
-    screen.clear()
-    screen.refresh()
-    return sketch
+	sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)]
+	for i in range(max_dim):
+		sketch[i][0] = chr(48 +i)
+	for j in range(max_dim):
+		sketch[0][j] = chr(48 +j)
+	screen.clear()
+	screen.refresh()
 
 def read_button(channel):
-        if GPIO.input(channel) == 1:
-                button_key = channel
-                if button_key == button_down:
-                        if pen_position[1] < max_dim-1:
-                                pen_position = [pen_position[0], pen_position[1]+1]
-                if button_key == button_up:
-                        if pen_position[1] > 1:
-                                pen_position = [pen_position[0], pen_position[1]-1]
-                if button_key == button_right:
-                        if pen_position[0] < max_dim-1:
-                                pen_position = [pen_position[0]+1, pen_position[1]]
-                if button_key == button_left:
-                        if pen_position[0] > 1:
-                                pen_position = [pen_position[0]-1, pen_position[1]]
-                if button_key == button_clear:
-                        sketch = clearscreen(screen)
-                if button_key == button_exit:
-                        exit = True
-
-def main(screen):
-        sketch = clearscreen()
-
-        while(1):
-                drawscreen(sketch)
-                if exit == True:
-                        break
-                sketch[pen_position[0]][pen_position[1]] = 'x'
-                curses.napms(100)
+	if GPIO.input(channel) == 1:
+		button_key = channel
+		if (button_key == button_down) and (pen_position[1] < max_dim-1):
+			pen_position = [pen_position[0], pen_position[1]+1]
+		if (button_key == button_up) and ( pen_position[1] > 1):
+			pen_position = [pen_position[0], pen_position[1]-1]
+		if (button_key == button_right) and (pen_position[0] < max_dim-1):
+			pen_position = [pen_position[0]+1, pen_position[1]]
+		if (button_key == button_left) and (pen_position[0] > 1):
+			pen_position = [pen_position[0]-1, pen_position[1]]
+		if button_key == button_clear:
+			sketch = clearscreen(screen)
+		if button_key == button_exit:
+			exit = True
 
 GPIO.add_event_detect(button_exit, GPIO.FALLING, callback=read_button)
 GPIO.add_event_detect(button_clear, GPIO.FALLING, callback=read_button)
@@ -93,5 +83,15 @@ GPIO.add_event_detect(button_right, GPIO.FALLING, callback=read_button)
 GPIO.add_event_detect(button_up, GPIO.FALLING, callback=read_button)
 GPIO.add_event_detect(button_down, GPIO.FALLING, callback=read_button)
 
-curses.wrapper(main)
 
+def main(screen):
+	drawscreen()
+
+	while(1):
+		drawscreen()
+		if exit == True:
+			break
+		sketch[pen_position[0]][pen_position[1]] = 'x'
+		curses.napms(100)
+
+curses.wrapper(main)
