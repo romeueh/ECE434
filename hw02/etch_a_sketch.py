@@ -86,6 +86,7 @@ def read_button():
 def main(screen):
 	drawscreen()
 	shake = False
+	pen_position = [1,1]
 
 	while(1):
 		drawscreen()
