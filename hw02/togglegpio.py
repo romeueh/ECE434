@@ -3,7 +3,7 @@
 import Adafruit_BBIO.GPIO as GPIO
 import time
 
-period = 0.1; 
+period = 0.00001; 
 
 LED1 = "P9_12"
 GPIO.setup(LED1, GPIO.OUT)
