@@ -40,6 +40,11 @@ screen.addstr("\nWhat size would you like to board to be 1-9?")
 screen.refresh()
 
 max_dim = int(screen.getch())-47
+sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)]
+for i in range(max_dim):
+	sketch[i][0] = chr(48 +i)
+for j in range(max_dim):
+	sketch[0][j] = chr(48 +j)
 
 def drawscreen():
 	screen.clear()
