@@ -19,8 +19,8 @@ button_exit = "P9_13"
 button_shake = "P9_14"
 button_left = "P9_17"
 button_right = "P9_18"
-button_up = "P9_21"
-button_down = "P9_22"
+button_up = "P9_23"
+button_down = "P9_24"
 
 GPIO.setup(button_exit, GPIO.IN)
 GPIO.setup(button_shake, GPIO.IN)
