@@ -78,11 +78,11 @@ def main(screen):
 		if (GPIO.event_detected(button_down)) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
 		if (GPIO.event_detected(button_up)) and ( pen_position[1] > 1):
-			changed_pen_position = [pen_position[0], pen_position[1]-1]
+			pen_position = [pen_position[0], pen_position[1]-1]
 		if (GPIO.event_detected(button_right)) and (pen_position[0] < max_dim-1):
-			changed_pen_position = [pen_position[0]+1, pen_position[1]]
+			pen_position = [pen_position[0]+1, pen_position[1]]
 		if (GPIO.event_detected(button_left)) and (pen_position[0] > 1):
-			changed_pen_position = [pen_position[0]-1, pen_position[1]]
+			pen_position = [pen_position[0]-1, pen_position[1]]
 		if GPIO.event_detected(button_shake):
 			shake = True
 		if GPIO.event_detected(button_exit):
