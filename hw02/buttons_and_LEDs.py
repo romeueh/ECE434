@@ -26,13 +26,13 @@ GPIO.setup(button_4, GPIO.IN)
 def update(channel):
   state = GPIO.input(channel)
   if (channel == button_1):
-    GPIO.output(LED1, state);
+    GPIO.output(LED_1, state);
   if (channel == button_2):
-    GPIO.output(LED2, state);
+    GPIO.output(LED_2, state);
   if (channel == button_3):
-    GPIO.output(LED3, state);
+    GPIO.output(LED_3, state);
   if (channel == button_4):
-    GPIO.output(LED4, state);
+    GPIO.output(LED_4, state);
 
 GPIO.add_event_detect(button_1, GPIO.BOTH, callback=update)
 GPIO.add_event_detect(button_2, GPIO.BOTH, callback=update)
