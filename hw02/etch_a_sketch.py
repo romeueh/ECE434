@@ -34,7 +34,7 @@ GPIO.add_event_detect(button_up, GPIO.FALLING)
 GPIO.add_event_detect(button_down, GPIO.FALLING)
 
 screen = curses.initscr()
-screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the arrow keys to direct the \npen on the screen. When you want to clear the screen press the space bar to \nshake the Etch-A-Sketch. Lastly, press q when you want to exit. Have fun!\n")
+screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-most buttons keys to direct the \npen on the screen. When you want to clear the screen press the 2nd button to \nshake the Etch-A-Sketch. Lastly, press the first button when you want to exit. Have fun!\n")
 screen.addstr("\nWhat size would you like to board to be 1-9?")
 screen.refresh()
 
