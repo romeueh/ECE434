@@ -62,11 +62,11 @@ def main(screen):
 	rotary_horizontal_position = encoder2.position
 
 	while(1):
-		if (rotary_vertical_position > encoder1.position) and (pen_position[1] < max_dim-1):
+		if (rotary_vertical_position < encoder1.position) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
 			rotary_vertical_position = encoder1.position
 			pos_changed = True
-		if (rotary_vertical_position < encoder1.position) and ( pen_position[1] > 1):
+		if (rotary_vertical_position > encoder1.position) and ( pen_position[1] > 1):
 			pen_position = [pen_position[0], pen_position[1]-1]
 			rotary_vertical_position = encoder1.position
 			pos_changed = True
