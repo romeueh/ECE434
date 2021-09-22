@@ -49,6 +49,7 @@ def clearscreen():
 def main(screen):
 	sketch = clearscreen()
 	pen_position = [1,1]
+	sketch[pen_position[0]*2] = 0x80
 	drawscreen(sketch, pen_position)
 	pos_changed = True
 	rotary_vertical_position = encoder1.position
