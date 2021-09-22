@@ -77,7 +77,7 @@ def main(screen):
 				pos_changed = True
 			rotary_horizontal_position = encoder2.position
 		if (rotary_horizontal_position > encoder2.position):
-			if(pen_position[0] > 0)
+			if(pen_position[0] > 0):
 				pen_position = [pen_position[0]-1, pen_position[1]]
 				pos_changed = True
 			rotary_horizontal_position = encoder2.position
