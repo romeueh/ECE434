@@ -38,7 +38,7 @@ screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-mo
 screen.addstr("\nWhat size would you like to board to be?")
 screen.refresh()
 
-def drawscreen(sketch):
+def drawscreen(sketch, pen_position):
 	sketch[2*pen_position[0]]=sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
 	bus.write_i2c_block_data(matrix, 0, sketch)
 
