@@ -3,6 +3,7 @@
 #Author: Eliza Romeu
 
 import time
+import smbus
 import curses
 import Adafruit_BBIO.GPIO as GPIO
 from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP0, eQEP2
@@ -29,28 +30,20 @@ GPIO.setup(button_shake, GPIO.IN)
 GPIO.add_event_detect(button_exit, GPIO.FALLING)
 GPIO.add_event_detect(button_shake, GPIO.FALLING)
 
+bus = smbus.SMBus(2)
+matrix = 0x70
+
 screen = curses.initscr()
 screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-most buttons keys to direct the \npen on the screen. When you want to clear the screen press the 2nd button to \nshake the Etch-A-Sketch. Lastly, press the first button when you want to exit. Have fun!\n")
 screen.addstr("\nWhat size would you like to board to be?")
 screen.refresh()
 
-max_dim = int(screen.getch())-47
-
 def drawscreen(sketch):
-	screen.clear()
-	for i in range(max_dim):
-		for j in range(max_dim):
-			screen.addch(i*2, j*3, sketch[j][i])
-	screen.refresh()
+	sketch[2*pen_position[0]]=lightboard[2*pen_position[0]] | (1<<(8-pen_position[1])) 
+        bus.write_i2c_block_data(matrix, 0, sketch)
 
 def clearscreen():
-	screen.clear()
-	sketch = [[' ' for i in range(max_dim)] for j in range(max_dim)]
-	for i in range(max_dim):
-		sketch[i][0] = chr(48 +i)
-	for j in range(max_dim):
-		sketch[0][j] = chr(48 +j)
-	screen.refresh()
+	sketch = [0x00 for i in range(16)]
 	return sketch
 
 def main(screen):
@@ -88,6 +81,5 @@ def main(screen):
 			sketch[pen_position[0]][pen_position[1]] = 'x'
 			drawscreen(sketch)
 			pos_changed = False
-		#curses.napms(10)
 
 curses.wrapper(main)
