@@ -88,7 +88,6 @@ def main(screen):
 			sketch[pen_position[0]][pen_position[1]] = 'x'
 			drawscreen(sketch)
 			pos_changed = False
-			curses.napms(50)
-		curses.napms(10)
+		#curses.napms(10)
 
 curses.wrapper(main)
