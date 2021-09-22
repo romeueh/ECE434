@@ -5,6 +5,7 @@
 import time
 import curses
 import Adafruit_BBIO.GPIO as GPIO
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP1, eQEP2
 from curses import wrapper
 
 global pen_position
@@ -12,30 +13,28 @@ global max_dim
 global screen
 global pos_changed
 
+encoder1 = RotaryEncoder(eQEP1)
+encoder2 = RotaryEncoder(eQEP2)
+
+encoder1.setAbsolute()
+encoder2.setAbsolute()
+encoder1.enable()
+encoder2.enable()
+
 button_exit = "P9_13"
 button_shake = "P9_14"
-button_left = "P9_17"
-button_right = "P9_18"
-button_up = "P9_23"
-button_down = "P9_24"
 
 GPIO.setup(button_exit, GPIO.IN)
 GPIO.setup(button_shake, GPIO.IN)
-GPIO.setup(button_left, GPIO.IN)
-GPIO.setup(button_right, GPIO.IN)
-GPIO.setup(button_up, GPIO.IN)
-GPIO.setup(button_down, GPIO.IN)
-
 GPIO.add_event_detect(button_exit, GPIO.FALLING)
 GPIO.add_event_detect(button_shake, GPIO.FALLING)
-GPIO.add_event_detect(button_left, GPIO.FALLING)
-GPIO.add_event_detect(button_right, GPIO.FALLING)
-GPIO.add_event_detect(button_up, GPIO.FALLING)
-GPIO.add_event_detect(button_down, GPIO.FALLING)
+
+rotary_vertical_position = encoder1.position
+rotary_horizontal_position = encoder2.position
 
 screen = curses.initscr()
 screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-most buttons keys to direct the \npen on the screen. When you want to clear the screen press the 2nd button to \nshake the Etch-A-Sketch. Lastly, press the first button when you want to exit. Have fun!\n")
-screen.addstr("\nWhat size would you like to board to be 1-9?")
+screen.addstr("\nWhat size would you like to board to be?")
 screen.refresh()
 
 max_dim = int(screen.getch())-47
@@ -64,17 +63,21 @@ def main(screen):
 	pos_changed = True
 
 	while(1):
-		if (GPIO.event_detected(button_down)) and (pen_position[1] < max_dim-1):
+		if (rotary_vertical_position > encoder1.position) and (pen_position[1] < max_dim-1):
 			pen_position = [pen_position[0], pen_position[1]+1]
+			rotary_vertical_position = encoder1.position
 			pos_changed = True
-		if (GPIO.event_detected(button_up)) and ( pen_position[1] > 1):
+		if (rotary_vertical_position < encoder1.position) and ( pen_position[1] > 1):
 			pen_position = [pen_position[0], pen_position[1]-1]
+			rotary_vertical_position = encoder1.position
 			pos_changed = True
-		if (GPIO.event_detected(button_right)) and (pen_position[0] < max_dim-1):
+		if (rotary_horizontal_position > encoder2.position) and (pen_position[0] < max_dim-1):
 			pen_position = [pen_position[0]+1, pen_position[1]]
+			rotary_horizontal_position = encoder2.position
 			pos_changed = True
-		if (GPIO.event_detected(button_left)) and (pen_position[0] > 1):
+		if (rotary_horizontal_position < encoder2.position) and (pen_position[0] > 1):
 			pen_position = [pen_position[0]-1, pen_position[1]]
+			rotary_horizontal_position = encoder2.position
 			pos_changed = True
 		if GPIO.event_detected(button_shake):
 			sketch = clearscreen()
