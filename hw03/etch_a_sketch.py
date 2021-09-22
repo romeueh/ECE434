@@ -39,8 +39,8 @@ screen.addstr("\nWhat size would you like to board to be?")
 screen.refresh()
 
 def drawscreen(sketch):
-	sketch[2*pen_position[0]]=lightboard[2*pen_position[0]] | (1<<(8-pen_position[1])) 
-        bus.write_i2c_block_data(matrix, 0, sketch)
+	sketch[2*pen_position[0]]=lightboard[2*pen_position[0]] | (1<<(8-pen_position[1]))
+	bus.write_i2c_block_data(matrix, 0, sketch)
 
 def clearscreen():
 	sketch = [0x00 for i in range(16)]
