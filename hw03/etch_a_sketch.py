@@ -85,6 +85,7 @@ def main(screen):
 			
 		if(pos_changed):
 			screen.addstr("\n" + str(pen_position))
+			screen.refresh()
 			drawscreen(sketch, pen_position)
 			pos_changed = False
 
