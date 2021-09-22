@@ -29,9 +29,6 @@ GPIO.setup(button_shake, GPIO.IN)
 GPIO.add_event_detect(button_exit, GPIO.FALLING)
 GPIO.add_event_detect(button_shake, GPIO.FALLING)
 
-rotary_vertical_position = encoder1.position
-rotary_horizontal_position = encoder2.position
-
 screen = curses.initscr()
 screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-most buttons keys to direct the \npen on the screen. When you want to clear the screen press the 2nd button to \nshake the Etch-A-Sketch. Lastly, press the first button when you want to exit. Have fun!\n")
 screen.addstr("\nWhat size would you like to board to be?")
@@ -61,6 +58,8 @@ def main(screen):
 	drawscreen(sketch)
 	pen_position = [1,1]
 	pos_changed = True
+	rotary_vertical_position = encoder1.position
+	rotary_horizontal_position = encoder2.position
 
 	while(1):
 		if (rotary_vertical_position > encoder1.position) and (pen_position[1] < max_dim-1):
