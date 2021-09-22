@@ -1,5 +1,10 @@
-i2cset -y 2 0x48 0x03 0x16
-i2cset -y 2 0x49 0x03 0x16
+echo i2c: P9_19, P9_20
+config-pin P9_19 i2c 
+config-pin P9_20 i2c
+
+echo i2c: P9_24, P9_26
+config-pin P9_24 i2c 
+config-pin P9_26 i2c
 
 temp1=`i2cget -y 2 0x48` #retrieve temp from sensor 1
 tempnum1=$((16#"${temp1:2:4}"))
