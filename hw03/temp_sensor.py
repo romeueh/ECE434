@@ -25,7 +25,7 @@ def update(channel):
     
    temp = temp*9/5 +32
    print(temp)
-   time.sleep(2)
+   time.sleep(5)
     
 GPIO.add_event_detect(alert1, GPIO.BOTH, callback=update)
 GPIO.add_event_detect(alert2, GPIO.BOTH, callback=update)
