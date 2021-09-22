@@ -5,7 +5,7 @@
 import time
 import curses
 import Adafruit_BBIO.GPIO as GPIO
-from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP1, eQEP2
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP0, eQEP2
 from curses import wrapper
 
 global pen_position
@@ -13,7 +13,7 @@ global max_dim
 global screen
 global pos_changed
 
-encoder1 = RotaryEncoder(eQEP1)
+encoder1 = RotaryEncoder(eQEP0)
 encoder2 = RotaryEncoder(eQEP2)
 
 encoder1.setAbsolute()
