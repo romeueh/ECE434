@@ -8,7 +8,6 @@ import curses
 import Adafruit_BBIO.GPIO as GPIO
 from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP0, eQEP2
 from curses import wrapper
-from smbus2 import SMBus
 
 global pen_position
 global max_dim
