@@ -38,8 +38,10 @@ bus.write_byte_data(matrix, 0x81, 0)
 bus.write_byte_data(matrix, 0xe7, 0)
 
 screen = curses.initscr()
-screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-most buttons keys to direct the \npen on the screen. When you want to clear the screen press the 2nd button to \nshake the Etch-A-Sketch. Lastly, press the first button when you want to exit. Have fun!\n")
-screen.addstr("\nWhat size would you like to board to be?")
+screen.addstr("Welcome to the game Etch-A-Sketch!")
+screen.addstr("\nUse the two knobs to move left and right.")
+screen.addstr("\nUse the right-most button to clear the screen.")
+screen.addstr("\nUse the left-most button to exit.")
 screen.refresh()
 
 def drawscreen(sketch, pen_position):
