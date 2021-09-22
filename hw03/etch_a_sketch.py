@@ -48,8 +48,8 @@ def clearscreen():
 
 def main(screen):
 	sketch = clearscreen()
-	drawscreen(sketch)
 	pen_position = [1,1]
+	drawscreen(sketch, pen_position)
 	pos_changed = True
 	rotary_vertical_position = encoder1.position
 	rotary_horizontal_position = encoder2.position
@@ -79,7 +79,7 @@ def main(screen):
 			
 		if(pos_changed):
 			sketch[pen_position[0]][pen_position[1]] = 'x'
-			drawscreen(sketch)
+			drawscreen(sketch, pen_position)
 			pos_changed = False
 
 curses.wrapper(main)
