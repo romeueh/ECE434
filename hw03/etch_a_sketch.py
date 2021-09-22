@@ -54,7 +54,7 @@ def clearscreen():
 
 def main(screen):
 	sketch = clearscreen()
-	pen_position = [1,1]
+	pen_position = [1,2]
 	drawscreen(sketch, pen_position)
 	pos_changed = True
 	rotary_vertical_position = encoder1.position
@@ -84,8 +84,6 @@ def main(screen):
 			break
 			
 		if(pos_changed):
-			screen.addstr("\n" + str(pen_position))
-			screen.refresh()
 			drawscreen(sketch, pen_position)
 			pos_changed = False
 
