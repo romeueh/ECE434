@@ -78,7 +78,6 @@ def main(screen):
 			break
 			
 		if(pos_changed):
-			sketch[pen_position[0]][pen_position[1]] = 'x'
 			drawscreen(sketch, pen_position)
 			pos_changed = False
 
