@@ -53,14 +53,13 @@ def clearscreen():
 def main(screen):
 	sketch = clearscreen()
 	pen_position = [1,1]
-	#sketch[pen_position[0]*2] = 0x80
 	drawscreen(sketch, pen_position)
 	pos_changed = True
 	rotary_vertical_position = encoder1.position
 	rotary_horizontal_position = encoder2.position
 
 	while(1):
-		if (rotary_vertical_position > encoder1.position) and (pen_position[1] < 8-1):
+		if (rotary_vertical_position > encoder1.position) and (pen_position[1] < 8):
 			pen_position = [pen_position[0], pen_position[1]+1]
 			rotary_vertical_position = encoder1.position
 			pos_changed = True
@@ -68,7 +67,7 @@ def main(screen):
 			pen_position = [pen_position[0], pen_position[1]-1]
 			rotary_vertical_position = encoder1.position
 			pos_changed = True
-		if (rotary_horizontal_position < encoder2.position) and (pen_position[0] < 8-1):
+		if (rotary_horizontal_position < encoder2.position) and (pen_position[0] < 8):
 			pen_position = [pen_position[0]+1, pen_position[1]]
 			rotary_horizontal_position = encoder2.position
 			pos_changed = True
