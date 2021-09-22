@@ -33,6 +33,10 @@ GPIO.add_event_detect(button_shake, GPIO.FALLING)
 bus = smbus.SMBus(2)
 matrix = 0x70
 
+bus.write_byte_data(matrix, 0x21, 0)
+bus.write_byte_data(matrix, 0x81, 0)
+bus.write_byte_data(matrix, 0xe7, 0)
+
 screen = curses.initscr()
 screen.addstr("Welcome to the game Etch-A-Sketch! To begin use the four right-most buttons keys to direct the \npen on the screen. When you want to clear the screen press the 2nd button to \nshake the Etch-A-Sketch. Lastly, press the first button when you want to exit. Have fun!\n")
 screen.addstr("\nWhat size would you like to board to be?")
