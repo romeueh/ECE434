@@ -1,6 +1,6 @@
-echo eqep0: P9_27, P9_42B
+echo eqep0: P9_27, P9_92
 config-pin P9_27 eqep
-config-pin P9_42B eqep
+config-pin P9_92 eqep
 
 echo eqep2: P8_11, P8_12
 config-pin P8_11 eqep 
