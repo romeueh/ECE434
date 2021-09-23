@@ -32,6 +32,10 @@ GPIO.add_event_detect(alert2, GPIO.BOTH, callback=update)
 
 try:
     while True:
+        temp1 = bus.read_byte_data(sensor1,0)
+        print(temp1)
+        temp2 = bus.read_byte_data(sensor2,0)
+        print(temp2)
         time.sleep(100)
 except KeyboardInterrupt:
     GPIO.cleanup()
