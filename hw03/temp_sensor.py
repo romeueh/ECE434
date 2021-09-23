@@ -6,7 +6,7 @@ import time
 import smbus
 
 sensor1 = 0x48 
-alert1 = "P9_29"
+alert1 = "P9_30"
 GPIO.setup(alert1, GPIO.IN) 
 
 sensor2 = 0x4a 
