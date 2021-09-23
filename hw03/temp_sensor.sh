@@ -6,6 +6,10 @@ echo i2c1: P9_24, P9_26
 config-pin P9_24 i2c 
 config-pin P9_26 i2c
 
+echo gpio: P9_29, P9_30 #setup for python file
+config-pin P9_29 gpio 
+config-pin P9_30 gpio
+
 temp1=`i2cget -y 2 0x48` #retrieve temp from sensor 1
 tempnum1=$((16#"${temp1:2:4}"))
 
