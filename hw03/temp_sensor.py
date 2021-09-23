@@ -10,7 +10,7 @@ alert1 = "P9_29"
 GPIO.setup(alert1, GPIO.IN) 
 
 sensor2 = 0x4a 
-alert2 = "P9_30"
+alert2 = "P9_41"
 GPIO.setup(alert2, GPIO.IN)
 
 bus = smbus.SMBus(2)
