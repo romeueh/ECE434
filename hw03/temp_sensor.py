@@ -23,9 +23,9 @@ def update(channel):
     print("Threshold reached on temp 2")
     temp = bus.read_byte_data(sensor2,0)
     
-   temp = temp*9/5 +32
-   print(temp)
-   time.sleep(5)
+    temp = temp*9/5 +32
+    print(temp)
+    time.sleep(5)
     
 GPIO.add_event_detect(alert1, GPIO.BOTH, callback=update)
 GPIO.add_event_detect(alert2, GPIO.BOTH, callback=update)
