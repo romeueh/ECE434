@@ -15,7 +15,7 @@ button0 = 1<<26
 LED0 = 1<<27
 
 GPIO1_startaddr = 0x4804c000
-GPIO1_endaddr = 0x4804c000
+GPIO1_endaddr = 0x4804cfff
 GPIO1_size = GPIO1_endaddr-GPIO1_startaddr
 LED1 = 1<<17 
 button1 = 1<<18
