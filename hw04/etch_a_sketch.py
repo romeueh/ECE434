@@ -4,14 +4,31 @@
 
 import time
 import smbus
-import numpy
+import curses
 import Adafruit_BBIO.GPIO as GPIO
-from flask import Flask, render_template, request
-app = Flask(__name__)
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP0, eQEP2
+from curses import wrapper
 
 global pen_position
 global max_dim
+global screen
 global pos_changed
+
+encoder1 = RotaryEncoder(eQEP0)
+encoder2 = RotaryEncoder(eQEP2)
+
+encoder1.setAbsolute()
+encoder2.setAbsolute()
+encoder1.enable()
+encoder2.enable()
+
+button_exit = "P9_13"
+button_shake = "P9_14"
+
+GPIO.setup(button_exit, GPIO.IN)
+GPIO.setup(button_shake, GPIO.IN)
+GPIO.add_event_detect(button_exit, GPIO.FALLING)
+GPIO.add_event_detect(button_shake, GPIO.FALLING)
 
 bus = smbus.SMBus(2)
 matrix = 0x70
@@ -19,6 +36,13 @@ matrix = 0x70
 bus.write_byte_data(matrix, 0x21, 0)
 bus.write_byte_data(matrix, 0x81, 0)
 bus.write_byte_data(matrix, 0xe7, 0)
+
+screen = curses.initscr()
+screen.addstr("Welcome to the game Etch-A-Sketch!\n")
+screen.addstr("\nUse the two knobs to move the pen.")
+screen.addstr("\nUse the right-most button to clear the screen.")
+screen.addstr("\nUse the left-most button to exit.")
+screen.refresh()
 
 def drawscreen(sketch, pen_position):
 	sketch[2*pen_position[0]]=sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
@@ -28,8 +52,7 @@ def clearscreen():
 	sketch = [0x00 for i in range(16)]
 	return sketch
 
-@app.route("/<deviceName>/<action>")
-def action(deviceName, action):
+def main(screen):
 	sketch = clearscreen()
 	pen_position = [1,2]
 	drawscreen(sketch, pen_position)
@@ -38,22 +61,22 @@ def action(deviceName, action):
 	rotary_horizontal_position = encoder2.position
 
 	while(1):
-		if (action == "down"):
+		if (rotary_vertical_position > encoder1.position):
 			if(pen_position[1] < 8):
 				pen_position = [pen_position[0], pen_position[1]+1]
 				pos_changed = True
 			rotary_vertical_position = encoder1.position
-		if (action == "up"):
+		if (rotary_vertical_position < encoder1.position):
 			if(pen_position[1] > 1):
 				pen_position = [pen_position[0], pen_position[1]-1]
 				pos_changed = True
 			rotary_vertical_position = encoder1.position
-		if (action == "right"):
+		if (rotary_horizontal_position < encoder2.position):
 			if(pen_position[0] < 8-1):
 				pen_position = [pen_position[0]+1, pen_position[1]]
 				pos_changed = True
 			rotary_horizontal_position = encoder2.position
-		if (action == "left"):
+		if (rotary_horizontal_position > encoder2.position):
 			if(pen_position[0] > 0):
 				pen_position = [pen_position[0]-1, pen_position[1]]
 				pos_changed = True
@@ -67,8 +90,5 @@ def action(deviceName, action):
 		if(pos_changed):
 			drawscreen(sketch, pen_position)
 			pos_changed = False
-			
-	return render_template('index.html', **templateData)
 
-if __name__ == "__main__":
-        app.run(debug=True, port=8081, host='0.0.0.0')
+curses.wrapper(main)
