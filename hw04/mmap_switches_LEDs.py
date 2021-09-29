@@ -21,8 +21,8 @@ LED1 = 1<<17
 button1 = 1<<14
 
 with open("/dev/mem", "r+b" ) as h:
-  mem0 = mmap(f.fileno(), GPIO0_size, offset=GPIO0_startaddr)
-with open("/dev/mem", "r+b" ) as h:
+  mem0 = mmap(h.fileno(), GPIO0_size, offset=GPIO0_startaddr)
+with open("/dev/mem", "r+b" ) as f:
   mem1 = mmap(f.fileno(), GPIO1_size, offset=GPIO1_startaddr)
 
 packed_reg0 = mem0[GPIO_OE:GPIO_OE+4]
