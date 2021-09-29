@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import mmap, time, struct
+# Credit: https://graycat.io/tutorials/beaglebone-io-using-python-mmap/
+import time, struct
 from mmap import mmap
 
 GPIO_OE = 0x134
