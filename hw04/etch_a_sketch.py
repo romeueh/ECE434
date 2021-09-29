@@ -4,7 +4,6 @@
 
 import time
 import smbus
-import curses
 import Adafruit_BBIO.GPIO as GPIO
 from curses import wrapper
 from flask import Flask, render_template, request
@@ -12,20 +11,14 @@ app = Flask(__name__)
 
 global pen_position
 global max_dim
-global screen
 global pos_changed
 
-bus = smbus.SMBus(2)
+bus = smbus.SMBus(1)
 matrix = 0x70
 
 bus.write_byte_data(matrix, 0x21, 0)
 bus.write_byte_data(matrix, 0x81, 0)
 bus.write_byte_data(matrix, 0xe7, 0)
-
-screen = curses.initscr()
-screen.addstr("Welcome to the game Etch-A-Sketch!\n")
-screen.addstr("Open any web browser and browse to 192.168.7.2:8081")
-screen.refresh()
 
 def drawscreen(sketch, pen_position):
 	sketch[2*pen_position[0]]=sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
