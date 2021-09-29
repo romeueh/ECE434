@@ -29,7 +29,7 @@ def index():
 def action(action):
 	global pen_position
 	global sketch
-	pos_changed = True
+	pos_changed = False
 
 	if (action == "up" and pen_position[1] < 8):
 		pen_position = [pen_position[0], pen_position[1]+1]
@@ -44,9 +44,8 @@ def action(action):
 		pen_position = [pen_position[0]-1, pen_position[1]]
 		pos_changed = True
 	if (action == "clear"):
-		for i in range(16):
-			sketch[i] = 0x00
-		pos_changed = True
+		sketch = [0x00 for i in range(16)]
+		spos_changed = True
 	#if GPIO.event_detected(button_exit):
 		#break
 			
