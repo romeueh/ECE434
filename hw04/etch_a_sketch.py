@@ -5,7 +5,6 @@
 import time
 import smbus
 import Adafruit_BBIO.GPIO as GPIO
-from curses import wrapper
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
