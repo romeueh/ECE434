@@ -16,7 +16,7 @@ with open("/dev/mem", "r+b" ) as f:
   mem = mmap(f.fileno(), GPIO1_size, offset=GPIO1_startaddr)
 
 packed_reg = mem[GPIO_OE:GPIO_OE+4]
-=
+
 reg_status = struct.unpack("<L", packed_reg)[0]
 
 reg_status &= ~(USR3)
