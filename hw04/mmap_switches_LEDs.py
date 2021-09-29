@@ -41,7 +41,7 @@ try:
   while(True):
     button0_packed = mem0[GPIO_DATAIN:GPIO_DATAIN+4] #same process used as above
     button0_status = struct.unpack("<L", button0_packed)[0] 
-    if (button0_status0 & button0 ) == button0:
+    if (button0_status & button0 ) == button0:
       mem0[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", LED0)
     else:
       mem0[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", LED0)
