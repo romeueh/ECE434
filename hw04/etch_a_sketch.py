@@ -21,8 +21,8 @@ bus.write_byte_data(matrix, 0xe7, 0)
 sketch[2*pen_position[0]]=sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
 bus.write_i2c_block_data(matrix, 0, sketch)
 
-@app.route("/<deviceName>/<action>")
-def action(deviceName, action):
+@app.route("/<action>")
+def action(action):
 	global pen_position
 	global sketch
 	pos_changed = True
