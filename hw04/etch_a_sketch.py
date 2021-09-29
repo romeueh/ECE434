@@ -44,7 +44,8 @@ def action(action):
 		pen_position = [pen_position[0]-1, pen_position[1]]
 		pos_changed = True
 	if (action == "clear"):
-		sketch = [0x00 for i in range(16)]
+		for i in range(16):
+			sketch[i] = 0x00
 		pos_changed = True
 	#if GPIO.event_detected(button_exit):
 		#break
