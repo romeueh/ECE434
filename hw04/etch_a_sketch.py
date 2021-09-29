@@ -15,7 +15,7 @@ global max_dim
 global screen
 global pos_changed
 
-bus = smbus.SMBus(1)
+bus = smbus.SMBus(2)
 matrix = 0x70
 
 bus.write_byte_data(matrix, 0x21, 0)
