@@ -10,8 +10,8 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 global pen_position
-global max_dim
-global pos_changed
+global sketch
+pen_position = [1,2]
 
 bus = smbus.SMBus(1)
 matrix = 0x70
@@ -28,45 +28,36 @@ def clearscreen():
 	sketch = [0x00 for i in range(16)]
 	return sketch
 
+sketch = clearscreen()
+drawscreen(sketch, pen_position)
+
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
-	sketch = clearscreen()
-	pen_position = [1,2]
-	drawscreen(sketch, pen_position)
+	global pen_position
+	global sketch
 	pos_changed = True
-	rotary_vertical_position = encoder1.position
-	rotary_horizontal_position = encoder2.position
 
-	while(1):
-		if (action == "down"):
-			if(pen_position[1] < 8):
-				pen_position = [pen_position[0], pen_position[1]+1]
-				pos_changed = True
-			rotary_vertical_position = encoder1.position
-		if (action == "up"):
-			if(pen_position[1] > 1):
-				pen_position = [pen_position[0], pen_position[1]-1]
-				pos_changed = True
-			rotary_vertical_position = encoder1.position
-		if (action == "right"):
-			if(pen_position[0] < 8-1):
-				pen_position = [pen_position[0]+1, pen_position[1]]
-				pos_changed = True
-			rotary_horizontal_position = encoder2.position
-		if (action == "left"):
-			if(pen_position[0] > 0):
-				pen_position = [pen_position[0]-1, pen_position[1]]
-				pos_changed = True
-			rotary_horizontal_position = encoder2.position
-		if GPIO.event_detected(button_shake):
-			sketch = clearscreen()
-			pos_changed = True
-		if GPIO.event_detected(button_exit):
-			break
+	if (action == "down" and pen_position[1] < 8):
+		pen_position = [pen_position[0], pen_position[1]+1]
+		pos_changed = True
+	if (action == "up" and pen_position[1] > 1):
+		pen_position = [pen_position[0], pen_position[1]-1]
+		pos_changed = True
+	if (action == "right" and pen_position[0] < 8-1):
+		pen_position = [pen_position[0]+1, pen_position[1]]
+		pos_changed = True
+	if (action == "left" and pen_position[0] > 0):
+		pen_position = [pen_position[0]-1, pen_position[1]]
+		pos_changed = True
+	if (action == "clear"):
+		sketch = clearscreen()
+		pos_changed = True
+	#if GPIO.event_detected(button_exit):
+		#break
 			
-		if(pos_changed):
-			drawscreen(sketch, pen_position)
-			pos_changed = False
+	if(pos_changed):
+		drawscreen(sketch, pen_position)
+		pos_changed = False
 			
 	return render_template('index.html', **templateData)
 
