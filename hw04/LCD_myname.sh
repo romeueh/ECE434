@@ -1,7 +1,7 @@
 # Here's how to use imagemagick to display text
 # Make a blank image
 SIZE=320x240
-TMP_FILE=boris_ref_iamge.png;
+TMP_FILE=boris_ref_image.png;
 
 convert $TMP_FILE -resize $TMP_FILE
 convert $TMP_FILE -rotate 0 $TMP_FILE
