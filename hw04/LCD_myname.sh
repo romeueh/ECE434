@@ -10,4 +10,5 @@ convert -background lightblue -fill blue -font Times-Roman -pointsize 24 \
      -draw "text 0,200 'Eliza Romeu'" \
      $TMP_FILE
 
+convert $TMP_FILE -rotate 90 $TMP_FILE
 sudo fbi -noverbose -T 1 $TMP_FILE
