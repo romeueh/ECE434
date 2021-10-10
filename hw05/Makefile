@@ -63,12 +63,6 @@ LiNKER_FLAGS := -lstdc++
 .PHONY : all
 all : app.arm
 
-# The "all" rule commonly specifies all executable targets to
-# be built. Note, the user has full control over what the "all"
-# rule builds. In this solution, we only have one target.
-# However, in the final Beagle makefile, you'll see more
-# targets listed. 
-
 # -----------------------------------
 # ------ executable rule (.x) -------
 # -----------------------------------
@@ -91,10 +85,6 @@ clean :
 	rm -rf app.arm
 	rm -rf app.o
 
-# The "clean" rule should remove all files created by
-# the makefile (e.g. the executables and intermediate
-# files).
-
 # -------------------------------------
 # ----- basic debug for Makefile ------
 #
@@ -103,7 +93,3 @@ clean :
 .PHONY : test
 test: 
 	@echo CC = $(CC)
-
-# We use test to print out the user-defined variables to
-# make sure they are set properly - this helps with 
-# debugging makefile errors.
