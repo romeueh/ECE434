@@ -27,7 +27,7 @@ MODULE_PARM_DESC(gpioLED, " GPIO LED number (default=50)");     ///< parameter d
 
 static unsigned int gpioLED2 = 60;           ///< Default GPIO for the LED is 60 (P9_12)
 module_param(gpioLED2, uint, S_IRUGO);       ///< Param desc. S_IRUGO can be read/not changed
-MODULE_PARM_DESC(gpioLED2, " GPIO LED number (default=14)");     ///< parameter description
+MODULE_PARM_DESC(gpioLED2, " GPIO LED number (default=60)");     ///< parameter description
 
 static unsigned int blinkPeriod = 1000;     ///< The blink period in ms
 module_param(blinkPeriod, uint, S_IRUGO);   ///< Param desc. S_IRUGO can be read/not changed
