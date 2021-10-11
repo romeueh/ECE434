@@ -4,10 +4,13 @@
  * @date   10 October 2021
 */
 
-import time
 import smbus
-import numpy
-import Adafruit_BBIO.GPIO as GPIO
+
+#include <stdio.h>
+#include <stdint.h>
+#include <fcntl.h>
+#include <stdlib.h>
+
 #include <linux/input.h>	/* BUS_I2C */
 #include <linux/i2c.h>
 #include <linux/module.h>
@@ -16,16 +19,22 @@ import Adafruit_BBIO.GPIO as GPIO
 #include <linux/pm.h>
 #include "adxl34x.h"
 
+#include <unistd.h>
+#include <linux/i2c-dev.h>
+#include <linux/i2c.h>
+#include <sys/ioctl.h>
+#include "smbus.h" 
+
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Eliza Romeu");
 MODULE_DESCRIPTION("Etch a Sketch with Digital Accelerometer I2C Bus Driver");
 MODULE_VERSION("0.1");
 
-bus = smbus.SMBus(1)
-matrix = 0x70
-sketch = [0x00 for i in range(16)]
-pen_position = [1,2]
+#define bus smbus.SMBus(1)
+#define matrix 0x70
+#define sketch [0x00 for i in range(16)]
+#define pen_position [1,2]
 
 bus.write_byte_data(matrix, 0x21, 0)
 bus.write_byte_data(matrix, 0x81, 0)
@@ -58,6 +67,3 @@ def action(action):
 	bus.write_i2c_block_data(matrix, 0, sketch)
 			
 	return render_template('index.html')
-
-if __name__ == "__main__":
-        app.run(debug=True, port=8081, host='0.0.0.0')
