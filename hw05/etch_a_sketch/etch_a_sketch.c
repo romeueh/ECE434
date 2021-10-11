@@ -4,8 +4,6 @@
  * @date   10 October 2021
 */
 
-import smbus
-
 #include <stdio.h>
 #include <stdint.h>
 #include <fcntl.h>
@@ -28,6 +26,7 @@ MODULE_VERSION("0.1");
 
 #define bus smbus.SMBus(1)
 #define matrix 0x70
+#define ADXL345	0xE5
 #define sketch [0x00 for i in range(16)]
 #define pen_position [1,2]
 
@@ -75,8 +74,8 @@ void matrix_Calibration()
 }
 
 int main(int argc, char **argv) {
-	matrix_Calibration();
 	i2c_Begin();
+	matrix_Calibration();
 	
 	sketch[2*pen_position[0]] = sketch[2*pen_position[0]] | (1<<(8-pen_position[1]));
 	i2c_Write_Byte(fd, matrix, sketch);
