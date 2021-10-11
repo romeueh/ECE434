@@ -1,0 +1,1 @@
+cmd_/home/romeueh/ECE434/hw05/led/led.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/romeueh/ECE434/hw05/led/led.ko /home/romeueh/ECE434/hw05/led/led.o /home/romeueh/ECE434/hw05/led/led.mod.o;  true
