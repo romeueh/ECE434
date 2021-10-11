@@ -31,14 +31,14 @@ MODULE_VERSION("0.1");
 #define sketch [0x00 for i in range(16)]
 #define pen_position [1,2]
 
-bus.write_byte_data(matrix, 0x21, 0)
-bus.write_byte_data(matrix, 0x81, 0)
-bus.write_byte_data(matrix, 0xe7, 0)
-
-sketch[2*pen_position[0]] = sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
-bus.write_i2c_block_data(matrix, 0, sketch)
-
 int main(int argc, char **argv) {
+	bus.write_byte_data(matrix, 0x21, 0)
+	bus.write_byte_data(matrix, 0x81, 0)
+	bus.write_byte_data(matrix, 0xe7, 0)
+
+	sketch[2*pen_position[0]] = sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
+	bus.write_i2c_block_data(matrix, 0, sketch)
+
 	while(true){
 		if (action == "up" and pen_position[1] < 8):
 			pen_position = [pen_position[0], pen_position[1]+1]
