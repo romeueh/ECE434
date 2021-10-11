@@ -1,13 +1,26 @@
-#!/usr/bin/env python3
-#chmod +x etch_a_sketch.py
-#Author: Eliza Romeu
+/**
+ * @file   etch_a_sketch.c
+ * @author Eliza Romeu
+ * @date   10 October 2021
+*/
 
 import time
 import smbus
 import numpy
 import Adafruit_BBIO.GPIO as GPIO
-from flask import Flask, render_template, request
-app = Flask(__name__)
+#include <linux/input.h>	/* BUS_I2C */
+#include <linux/i2c.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/types.h>
+#include <linux/pm.h>
+#include "adxl34x.h"
+
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Eliza Romeu");
+MODULE_DESCRIPTION("Etch a Sketch with Digital Accelerometer I2C Bus Driver");
+MODULE_VERSION("0.1");
 
 bus = smbus.SMBus(1)
 matrix = 0x70
