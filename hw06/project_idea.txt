@@ -1,6 +1,0 @@
-A Toy Piano:
-
-This proejct would have enought keys for a few octaves and would play the note when pressed.
-Similar to a key board there would be options to syntehesize the audio (i.e piano, trumpet, choir, etc.)
-There would also be a mode to to teach how to play simple reloaded songs where and led would light up underneath the paino keye to indicate which note to press.
-There would also be a sound actived LED Music spectrum to reflect the different tones that are being played.
