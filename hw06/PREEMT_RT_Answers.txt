@@ -1,0 +1,33 @@
+1. Where does Julia Cartwright work? 
+Julia Cartwright works at National Instruments.
+
+2. What is PREEMT_RT? 
+PREEMT_RT is a patch for Linus that makes it into a real-time system.
+
+3. What is mixed criticality? 
+Mixed Criticality is when there are two degrees of time sensitivity where one is critial and one isn't.
+
+4. How can drivers misbehave? 
+Drivers can misbehave by prioritizing non RT tasks when the driver stacks are shared between RT tasks and non-RT tasks.
+
+5. What is Δ in Figure 1? 
+In Figure 1, Δ is the time between an event is triggered vs it's execution.
+
+6. What is Cyclictest[2]? 
+Take a time stamp, sleep for a fixed duration and then sleep for a fixed duration. The difference between the two timestamps with the duration subtracted out is the delta mentioned above.
+
+7. What is plotted in Figure 2? 
+Figure 2 plotted a histogram comparing the Cyclictest being performed on an OS with vs. without the PREEMT_RT patch.
+
+8. What is dispatch latency? Scheduling latency? 
+Dispatch latency refers to the amount of time it takes between the interrupt occurring and the thread scheduling being told something needs to run. 
+Scheduling latency refers to time it tasks from the scheduler running to the CPU being given the task to execute.
+
+9. What is mainline?
+Mainline is the tree where all new features are introduce d and developed 
+
+10. What is keeping the External event in Figure 3 from starting? 
+The execution of the low priority interrupt  is keeping the External event in Figure 3 from starting.
+
+11. Why can the External event in Figure 4 start sooner? 
+The External event in Figure 4 can start sooner because when using the PREEMT RT patch only a very small amount of time has to be spent waking up the threads. They can also now be preempted, reducing the irq_dispatch latency.
