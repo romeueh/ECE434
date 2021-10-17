@@ -1,10 +1,10 @@
-PREEMT_RT_Answers.txt
+PREEMT_RT_Answers.txt : 
 Answered Questions from "What Every Driver Developer Should Know about RT"
 
-Cyclictest_heavy-load.jpg
+Cyclictest_heavy-load.jpg : 
 Histogram plot of a heavy load running on the rt vs regular kernel.
 
-Cyclictest_no-load.jpg
+Cyclictest_no-load.jpg : 
 Histogram plot of no load running on the rt vs regular kernel.
 
 
