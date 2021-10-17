@@ -14,7 +14,7 @@ Drivers can misbehave by prioritizing non RT tasks when the driver stacks are sh
 In Figure 1, Δ is the time between an event is triggered vs it's execution.
 
 6. What is Cyclictest[2]? 
-Take a time stamp, sleep for a fixed duration and then sleep for a fixed duration. The difference between the two timestamps with the duration subtracted out is the delta mentioned above.
+Cyclictest accurately and repeatedly measures the difference between a thread's intended wake-up time and the time at which it actually wakes up in order to provide statistics about the system's latencies.
 
 7. What is plotted in Figure 2? 
 Figure 2 plotted a histogram comparing the Cyclictest being performed on an OS with vs. without the PREEMT_RT patch.
@@ -30,4 +30,4 @@ Mainline is the tree where all new features are introduce d and developed
 The execution of the low priority interrupt  is keeping the External event in Figure 3 from starting.
 
 11. Why can the External event in Figure 4 start sooner? 
-The External event in Figure 4 can start sooner because when using the PREEMT RT patch only a very small amount of time has to be spent waking up the threads. They can also now be preempted, reducing the irq_dispatch latency.
+The External event in Figure 4 can start sooner because when using the PREEMT RT patch only a very small amount of time has to be spent waking up the threadsa and they can now be preempted which reduced the irq_dispatch latency.
