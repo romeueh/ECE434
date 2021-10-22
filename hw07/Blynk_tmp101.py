@@ -12,10 +12,10 @@ bus = smbus.SMBus(2)
 tempAddr = 0x48
 
 # Get the autherization code (See setup.sh)
-BLYNK_AUTH = os.getenv('BLYNK_AUTH')
+BLYNK_AUTH_TOKEN = os.getenv('BLYNK_AUTH_TOKEN')
 
 # Initialize Blynk
-blynk = blynklib.Blynk(BLYNK_AUTH)
+blynk = blynklib.Blynk(BLYNK_AUTH_TOKEN)
 # create timers dispatcher instance
 timer = blynktimer.Timer()
 
