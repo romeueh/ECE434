@@ -27,10 +27,13 @@ def pollAccel():
     sensor=open('/sys/class/i2c-adapter/i2c-2/2-0053/iio:device1/in_accel_z_raw','r')
     while True:
         sensor.seek(0)
-        temp=sensor.readline()
-        if '-' in temp:
-            clearScreen()
-        time.sleep(.5)
+        accelVal=sensor.readline()
+	print(accelVal)
+        if '-' in accelVal:
+            sketch = [0x00 for i in range(16)]
+	    sketch[2*pen_position[0]]=sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
+	    bus.write_i2c_block_data(matrix, 0, sketch)
+        time.sleep(.25)
 
 @app.route("/")
 def index():
@@ -58,4 +61,7 @@ def action(action):
 	return render_template('index.html')
 
 if __name__ == "__main__":
+	t=threading.Thread(target=pollAccel)
+    	t.start()
+	
         app.run(debug=True, port=8081, host='0.0.0.0')
