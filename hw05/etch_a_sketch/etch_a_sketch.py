@@ -4,10 +4,10 @@
 
 import time
 import smbus
-import numpy
-import Adafruit_BBIO.GPIO as GPIO
+import threading
 from flask import Flask, render_template, request
 app = Flask(__name__)
+
 
 bus = smbus.SMBus(1)
 matrix = 0x70
@@ -20,6 +20,17 @@ bus.write_byte_data(matrix, 0xe7, 0)
 
 sketch[2*pen_position[0]]=sketch[2*pen_position[0]] | (1<<(8-pen_position[1]))
 bus.write_i2c_block_data(matrix, 0, sketch)
+
+def pollAccel():
+    init1= open('/sys/class/i2c-adapter/i2c-2/new_device','w')
+    init1.write('adxl345 0x53')
+    sensor=open('/sys/class/i2c-adapter/i2c-2/2-0053/iio:device1/in_accel_z_raw','r')
+    while True:
+        sensor.seek(0)
+        temp=sensor.readline()
+        if '-' in temp:
+            clearScreen()
+        time.sleep(.5)
 
 @app.route("/")
 def index():
