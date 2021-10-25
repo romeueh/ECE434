@@ -8,5 +8,5 @@ config-pin P9_26 i2c
 
 export BLYNK_AUTH_TOKEN='P7cwZgK-waBwdYRPwry9P-UXZ_OoMYDR'
 
-I2C=/sys/class/i2c-adapter/i2c-2
+I2C=/sys/class/i2c-adapter/i2c-1
 echo temp101 0x48 > $I2C/new_device
