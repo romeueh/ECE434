@@ -11,6 +11,7 @@ led
 Folder contains make file and c file to blink two LED buttons at different rates
 
 Etch-A-Sketch
+Folder contains setup and python file for etch a sketch - does not work properly (NO DEMO)
 
 # hw05 grading
 
