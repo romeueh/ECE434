@@ -6,7 +6,7 @@ import os
 import smbus
 
 # Use i2c bus 1
-bus = smbus.SMBus(2) 
+bus = smbus.SMBus(1) 
 
 # Use address 0x48
 tempAddr = 0x48
