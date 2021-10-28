@@ -1,3 +1,6 @@
+Final Project Page
+https://elinux.org/ECE434_Project:_Dancing_Fish
+
 Blynk
 Blynk_tmp101.py is a temperature display through Blynk -not working (NO DEMO)
 
