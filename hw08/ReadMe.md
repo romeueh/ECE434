@@ -23,6 +23,6 @@ input.pru0.c reads an input pin and writes it to an output pin.
 The I measure the transfer from input to the output to be 0.1 us.
 
 ### Analog Wave Generator
-sine.pru0.c is used to output an analog signal using the GPIO pins. 
+analog.pru0.c is used to output an analog signal using the GPIO pins. 
 
 I followed the directions in the PRU cookbook and the signal strongly resembled a sinusoid.
