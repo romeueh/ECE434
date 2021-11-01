@@ -31,5 +31,5 @@ I followed the directions in the PRU cookbook and the signal strongly resembled 
 | File | Clock Speed |
 | ----------- | ----------- |
 |  hello.pru.c | 12.5MHz
-|  pwm1.pru0.c |   | 50 MHz
-|  pwm4.pru0.c |   | 325.9 kHz
+|  pwm1.pru0.c | 50 MHz
+|  pwm4.pru0.c | 325.9 kHz
