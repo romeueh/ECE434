@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <pru_cfg.h>
 #include "resource_table_empty.h"
-#include "pwm1.h"
+#include "PruGpio.h"
 
 volatile register uint32_t __R30;
 volatile register uint32_t __R31;
