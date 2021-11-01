@@ -26,3 +26,5 @@ The I measure the transfer from input to the output to be 0.1 us.
 analog.pru0.c is used to output an analog signal using the GPIO pins. 
 
 I followed the directions in the PRU cookbook and the signal strongly resembled a sinusoid.
+
+### Overall Table of Results
