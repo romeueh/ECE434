@@ -27,9 +27,11 @@ analog.pru0.c is used to output an analog signal using the GPIO pins.
 
 I followed the directions in the PRU cookbook and the signal strongly resembled a sinusoid.
 
-### Overall Table of Results
+### Overall Results
 | File | Clock Speed |
 | ----------- | ----------- |
 |  hello.pru.c | 12.5MHz |
 |  pwm1.pru0.c | 50 MHz |
 |  pwm4.pru0.c | 325.9 kHz |
+
+Images of different waveforms can be found in the Captures folder.
