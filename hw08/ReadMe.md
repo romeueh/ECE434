@@ -14,7 +14,7 @@ I was unsure how record the standard deviation of the wave, but it should be a v
 ### Controlling the PWM Frequency
 pwm4.pru0.c will toggle 4 different channels.
 
-The highest frequency I can is 325.9kHz. Overall the waveform was pretty stable with little jitter. 
+The highest frequency I can is 360kHz. Overall the waveform was pretty stable with little jitter. 
 I could change the count for each channel by altering the parameters of the four loop.
 
 ### Reading an Input at Regular Intervals
@@ -32,6 +32,6 @@ I followed the directions in the PRU cookbook and the signal strongly resembled 
 | ----------- | ----------- |
 |  hello.pru.c | 12.5MHz |
 |  pwm1.pru0.c | 50 MHz |
-|  pwm4.pru0.c | 325.9 kHz |
+|  pwm4.pru0.c | 360 kHz |
 
 Images of different waveforms can be found in the Captures folder.
