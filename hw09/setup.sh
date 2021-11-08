@@ -28,5 +28,4 @@ sleep 0.1
 cat "$dev/$BUS-00$ADDR1/hwmon/hwmon0/temp1_input"
 cat "$dev/$BUS-00$ADDR2/hwmon/hwmon1/temp1_input"
 
-# need key
-export THING_KEY=
+
