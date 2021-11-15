@@ -30,7 +30,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 bus = smbus.SMBus(2)
 
 # The ID and range of a sample spreadsheet.
-SPREADSHEET_ID = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms' # need to change from sample
+SPREADSHEET_ID = '1PgFA--BuzkRDFu016JydEhkBxGjuFYY68bg4MrIhoqQ'
 RANGE_NAME = 'A2'
 
 def main():
