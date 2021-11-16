@@ -11,6 +11,8 @@ pwm1.pru0.c toggles an LED using the PRU.
 The waveform is very stable and there was little to no jitter. I ran the waveform at 50MHz. 
 I was unsure how record the standard deviation of the wave, but it should be a very small value.
 
+*The 'scope can compute it*
+
 ### Controlling the PWM Frequency
 pwm4.pru0.c will toggle 4 different channels.
 
@@ -35,3 +37,17 @@ I followed the directions in the PRU cookbook and the signal strongly resembled 
 |  pwm4.pru0.c | 630 kHz |
 
 Images of different waveforms can be found in the Captures folder.
+
+# hw08 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+| 14/14 | PRU
+|  2/2 | Controlling the PWM Frequency - optional
+|  2/2 | Reading an Input at Regular Intervals - optional
+|  2/2 | Analog Wave Generator - optional
+| 20/20 | **Total**
+
+*Well done*
+
+*My comments are in italics. --may*
